@@ -1,0 +1,147 @@
+:root {
+    --calc-bg: linear-gradient(145deg, #2d3436, #2c3e50);
+    --display-bg: rgba(0, 0, 0, 0.8);
+    --button-bg: rgba(255, 255, 255, 0.1);
+    --number-button-bg: rgba(255, 255, 255, 0.05);
+    --operator-button-bg: #e67e22;
+    --special-button-bg: #e74c3c;
+    --text-color: #ffffff;
+    --glow-color: rgba(230, 126, 34, 0.5);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000000;
+    background-image: 
+        radial-gradient(circle at 50% 50%, rgba(37, 37, 37, 0.8), transparent),
+        linear-gradient(45deg, #1a1a1a, #000000);
+}
+
+.calculator-container {
+    background: var(--calc-bg);
+    border-radius: 30px;
+    padding: 25px;
+    width: 350px;
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.5),
+        0 0 20px var(--glow-color);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+#display {
+    width: 100%;
+    height: 90px;
+    padding: 20px;
+    margin-bottom: 25px;
+    font-size: 45px;
+    text-align: right;
+    background: var(--display-bg);
+    color: var(--text-color);
+    border: none;
+    border-radius: 15px;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.buttons-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+button {
+    width: 70px;
+    height: 70px;
+    font-size: 28px;
+    border: none;
+    border-radius: 50%;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: var(--button-bg);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.numberButton {
+    background: var(--number-button-bg);
+}
+
+.operatorButton {
+    background: var(--operator-button-bg);
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+#equalButton {
+    grid-column: span 2;
+    width: 155px;
+    border-radius: 35px;
+    background: linear-gradient(45deg, #e67e22, #f39c12);
+    box-shadow: 0 5px 15px rgba(230, 126, 34, 0.4);
+}
+
+#zero {
+    grid-column: span 2;
+    width: 155px;
+    border-radius: 35px;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 
+        0 8px 20px rgba(0, 0, 0, 0.4),
+        0 0 15px var(--glow-color);
+}
+
+button:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.button-press {
+    animation: press 0.2s ease-out;
+}
+
+.particle {
+    position: absolute;
+    pointer-events: none;
+    background: var(--operator-button-bg);
+    border-radius: 50%;
+    animation: particle 0.6s ease-out forwards;
+}
+
+@keyframes press {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.95); }
+    100% { transform: scale(1); }
+}
+
+@keyframes particle {
+    0% { 
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% { 
+        transform: scale(1);
+        opacity: 0;
+    }
+}
