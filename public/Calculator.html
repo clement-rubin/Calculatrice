@@ -86,6 +86,20 @@
             currentOperation = '';
         }
 
+        function percent() {
+            if (currentValue) {
+                currentValue = (parseFloat(currentValue) / 100).toString();
+                updateDisplay(currentValue);
+            }
+        }
+
+        function plusMinus() {
+            if (currentValue) {
+                currentValue = (parseFloat(currentValue) * -1).toString();
+                updateDisplay(currentValue);
+            }
+        }
+
         // Gestionnaires d'événements pour les opérateurs
         document.querySelectorAll('.operatorButton').forEach(button => {
             button.addEventListener('click', function() {
@@ -113,6 +127,12 @@
 
         // Gestionnaire pour le bouton clear
         document.getElementById('clearButton').addEventListener('click', clear);
+
+        // Gestionnaire pour le bouton pourcentage
+        document.getElementById('percent').addEventListener('click', percent);
+
+        // Gestionnaire pour le bouton plus/moins
+        document.getElementById('plusMinus').addEventListener('click', plusMinus);
 
         // Initialisation de l'affichage
         clear();

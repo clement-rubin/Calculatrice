@@ -1,12 +1,20 @@
 :root {
-    --calc-bg: linear-gradient(145deg, #2d3436, #2c3e50);
+    --calc-bg: linear-gradient(145deg, #1a1f25, #2c3e50);
     --display-bg: rgba(0, 0, 0, 0.8);
-    --button-bg: rgba(255, 255, 255, 0.1);
-    --number-button-bg: rgba(255, 255, 255, 0.05);
-    --operator-button-bg: #e67e22;
+    --button-bg: rgba(255, 255, 255, 0.12);
+    --number-button-bg: rgba(20, 30, 48, 0.7);
+    --operator-button-bg: #ff7b29;
     --special-button-bg: #e74c3c;
     --text-color: #ffffff;
-    --glow-color: rgba(230, 126, 34, 0.5);
+    --glow-color: rgba(255, 123, 41, 0.6);
+    --display-glow: 0 0 20px rgba(0, 255, 255, 0.5);
+    --epic-shadow: 0 0 30px rgba(255, 123, 41, 0.4);
+    --aurora-color-1: rgba(0, 255, 200, 0.2);
+    --aurora-color-2: rgba(100, 0, 255, 0.2);
+    --aurora-color-3: rgba(255, 50, 100, 0.2);
+    --nebula-color-1: rgba(255, 100, 150, 0.15);
+    --nebula-color-2: rgba(100, 200, 255, 0.15);
+    --nebula-color-3: rgba(200, 100, 255, 0.15);
 }
 
 * {
@@ -14,6 +22,116 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', sans-serif;
+}
+
+/* Fond cosmique lumineux */
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000000;
+    background-image: 
+        radial-gradient(circle at 30% 30%, rgba(120, 0, 255, 0.4), transparent 40%),
+        radial-gradient(circle at 70% 60%, rgba(0, 200, 255, 0.4), transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(255, 100, 0, 0.2), transparent 60%),
+        linear-gradient(45deg, #1a1a1a, #000000);
+    overflow: hidden;
+    position: relative;
+}
+
+/* Ajout d'un halo lumineux central */
+body::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60vw;
+    height: 60vh;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(
+        circle,
+        rgba(255, 150, 50, 0.2) 0%,
+        rgba(150, 50, 255, 0.15) 40%,
+        rgba(0, 150, 200, 0.1) 60%,
+        transparent 80%
+    );
+    filter: blur(40px);
+    z-index: 1;
+    animation: pulseHalo 10s infinite alternate;
+}
+
+/* Rayons lumineux */
+.light-ray {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200vw;
+    height: 20vh;
+    background: linear-gradient(90deg, transparent, rgba(255, 200, 100, 0.05), transparent);
+    z-index: 1;
+    opacity: 0.7;
+    animation: rotateRay 20s linear infinite;
+}
+
+.light-ray:nth-child(2) {
+    height: 15vh;
+    background: linear-gradient(90deg, transparent, rgba(100, 200, 255, 0.05), transparent);
+    animation-duration: 25s;
+    animation-delay: -5s;
+}
+
+.light-ray:nth-child(3) {
+    height: 10vh;
+    background: linear-gradient(90deg, transparent, rgba(200, 100, 255, 0.05), transparent);
+    animation-duration: 30s;
+    animation-delay: -10s;
+}
+
+/* Anneaux lumineux pulsants */
+.glow-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vh;
+    height: 100vh;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    box-shadow: 0 0 50px rgba(255, 150, 0, 0.3);
+    z-index: 0;
+    animation: expandRing 15s ease-in-out infinite alternate;
+}
+
+.glow-ring:nth-child(2) {
+    width: 70vh;
+    height: 70vh;
+    border-color: rgba(50, 150, 255, 0.05);
+    box-shadow: 0 0 40px rgba(50, 150, 255, 0.2);
+    animation-duration: 20s;
+    animation-delay: -7s;
+}
+
+.glow-ring:nth-child(3) {
+    width: 40vh;
+    height: 40vh;
+    border-color: rgba(200, 50, 255, 0.05);
+    box-shadow: 0 0 30px rgba(200, 50, 255, 0.2);
+    animation-duration: 25s;
+    animation-delay: -14s;
+}
+
+/* Points lumineux flottants */
+.glow-orb {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: white;
+    border-radius: 50%;
+    z-index: 1;
+    opacity: 0.8;
+    animation: floatOrb 10s ease-in-out infinite;
 }
 
 body {
@@ -25,6 +143,7 @@ body {
     background-image: 
         radial-gradient(circle at 50% 50%, rgba(37, 37, 37, 0.8), transparent),
         linear-gradient(45deg, #1a1a1a, #000000);
+    overflow: hidden;
 }
 
 .calculator-container {
@@ -34,15 +153,38 @@ body {
     width: 350px;
     box-shadow: 
         0 15px 35px rgba(0, 0, 0, 0.5),
-        0 0 20px var(--glow-color);
+        0 0 20px var(--glow-color),
+        0 0 40px rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    animation: float 3s ease-in-out infinite;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    animation: float 6s ease-in-out infinite;
+    position: relative;
+    z-index: 10;
+}
+
+.calculator-container::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(45deg, #ff7b29, #0077ff, #ff7b29);
+    z-index: -1;
+    border-radius: 35px;
+    opacity: 0.5;
+    filter: blur(15px);
+    animation: borderGlow 8s linear infinite;
+}
+
+@keyframes borderGlow {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 0.8; }
 }
 
 @keyframes float {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    50% { transform: translateY(-15px); }
 }
 
 #display {
@@ -56,18 +198,21 @@ body {
     color: var(--text-color);
     border: none;
     border-radius: 15px;
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    box-shadow: 
+        inset 0 2px 5px rgba(0, 0, 0, 0.5),
+        var(--display-glow);
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+    transition: all 0.3s ease;
 }
 
 .buttons-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 15px;
+    position: relative;
 }
 
 button {
-    margin: -2px;
     width: 70px;
     height: 70px;
     font-size: 28px;
@@ -78,8 +223,30 @@ button {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     background: var(--button-bg);
     backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 
+        0 5px 15px rgba(0, 0, 0, 0.3),
+        0 0 5px rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+    opacity: 0;
+    transform: scale(0.1);
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+button:hover::before {
+    opacity: 1;
+    transform: scale(1);
 }
 
 .numberButton {
@@ -89,15 +256,41 @@ button {
 .operatorButton {
     background: var(--operator-button-bg);
     font-weight: bold;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    box-shadow: 
+        0 5px 15px rgba(0, 0, 0, 0.3),
+        0 0 10px rgba(255, 123, 41, 0.5);
 }
 
 #equalButton {
     grid-column: span 2;
     width: 155px;
     border-radius: 35px;
-    background: linear-gradient(45deg, #e67e22, #f39c12);
-    box-shadow: 0 5px 15px rgba(230, 126, 34, 0.4);
+    background: linear-gradient(45deg, #ff7b29, #ff9f29);
+    box-shadow: 
+        0 5px 15px rgba(230, 126, 34, 0.6),
+        0 0 20px rgba(255, 123, 41, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+#equalButton::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: linear-gradient(45deg, #ff7b29, #ff9f29);
+    z-index: -1;
+    border-radius: 40px;
+    filter: blur(10px);
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+#equalButton:hover::after {
+    opacity: 1;
 }
 
 #zero {
@@ -107,14 +300,14 @@ button {
 }
 
 button:hover {
-    transform: translateY(-3px);
+    transform: translateY(-5px);
     box-shadow: 
-        0 8px 20px rgba(0, 0, 0, 0.4),
+        0 10px 20px rgba(0, 0, 0, 0.5),
         0 0 15px var(--glow-color);
 }
 
 button:active {
-    transform: translateY(2px);
+    transform: scale(0.95) translateY(2px);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
@@ -125,14 +318,15 @@ button:active {
 .particle {
     position: absolute;
     pointer-events: none;
-    background: var(--operator-button-bg);
+    background: var(--glow-color);
     border-radius: 50%;
-    animation: particle 0.6s ease-out forwards;
+    box-shadow: 0 0 10px var(--glow-color);
+    animation: particle 0.8s ease-out forwards;
 }
 
 @keyframes press {
     0% { transform: scale(1); }
-    50% { transform: scale(0.95); }
+    50% { transform: scale(0.92); }
     100% { transform: scale(1); }
 }
 
@@ -142,7 +336,257 @@ button:active {
         opacity: 1;
     }
     100% { 
-        transform: scale(1);
+        transform: scale(1.5);
         opacity: 0;
     }
 }
+
+/* Ajout d'un fond d'étoiles */
+.star {
+    position: fixed;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle var(--duration) linear infinite;
+    z-index: 1;
+}
+
+@keyframes twinkle {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* Styles pour les flammes */
+.flame-container {
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    z-index: -1;
+    filter: blur(1px);
+    pointer-events: none;
+}
+
+.flame {
+    position: absolute;
+    bottom: 0;
+    width: 15px;
+    height: 80px;
+    background: linear-gradient(to top, #ff5000, #ff9000, #ffb800);
+    border-radius: 50% 50% 20% 20% / 40% 40% 15% 15%;
+    transform-origin: center bottom;
+    opacity: 0.8;
+    filter: blur(5px);
+    animation: flameFlicker 2s ease-in-out infinite;
+}
+
+.flame::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, #ff7800, transparent);
+    border-radius: 50% 50% 25% 25% / 40% 40% 20% 20%;
+    transform: scale(0.8, 0.9);
+    animation: innerFlame 3s ease-in-out infinite;
+}
+
+.flame.blue {
+    background: linear-gradient(to top, #0066ff, #00a2ff, #00d0ff);
+    height: 65px;
+    opacity: 0.7;
+    animation: flameFlicker 2.5s ease-in-out infinite;
+}
+
+.flame.blue::before {
+    background: linear-gradient(to top, #00b8ff, transparent);
+}
+
+.flame.purple {
+    background: linear-gradient(to top, #9900ff, #bf00ff, #dd77ff);
+    height: 70px;
+    opacity: 0.6;
+    animation: flameFlicker 2.2s ease-in-out infinite;
+}
+
+.flame.purple::before {
+    background: linear-gradient(to top, #aa55ff, transparent);
+}
+
+/* Ajout pour les flammes sur les boutons */
+.button-flame {
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    width: 40px;
+    height: 55px;
+    background: linear-gradient(to top, #ff5000, #ff9000, transparent);
+    border-radius: 50% 50% 35% 35% / 40% 40% 20% 20%;
+    opacity: 0;
+    filter: blur(3px);
+    animation: none;
+    z-index: -1;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+button:hover .button-flame {
+    transform: translateX(-50%) scale(1);
+    opacity: 0.9;
+    animation: buttonFlameFlicker 1s ease-out infinite;
+}
+
+.operatorButton .button-flame {
+    background: linear-gradient(to top, #ff7800, #ffaa00, transparent);
+    height: 65px;
+}
+
+#equalButton .button-flame {
+    background: linear-gradient(to top, #ff3000, #ff9000, transparent);
+    height: 75px;
+    width: 120px;
+    filter: blur(4px);
+}
+
+/* Animation pour les cercles de feu */
+.fire-ring {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, transparent 60%, rgba(255, 100, 0, 0) 70%, rgba(255, 80, 0, 0.3) 80%, rgba(255, 50, 0, 0) 90%);
+    z-index: -3;
+    opacity: 0;
+    transform: scale(0.5);
+}
+
+/* Animations pour les flammes */
+@keyframes flameFlicker {
+    0%, 100% {
+        transform: scaleY(1) scaleX(1) rotate(0deg);
+        opacity: 0.8;
+    }
+    25% {
+        transform: scaleY(1.1) scaleX(0.95) rotate(-1deg);
+        opacity: 0.7;
+    }
+    50% {
+        transform: scaleY(0.9) scaleX(1.05) rotate(1deg);
+        opacity: 0.85;
+    }
+    75% {
+        transform: scaleY(1.05) scaleX(0.95) rotate(-0.5deg);
+        opacity: 0.75;
+    }
+}
+
+@keyframes innerFlame {
+    0%, 100% { transform: scale(0.8, 0.9); opacity: 0.8; }
+    50% { transform: scale(0.75, 0.95); opacity: 0.9; }
+}
+
+@keyframes buttonFlameFlicker {
+    0%, 100% {
+        transform: translateX(-50%) scaleY(1) scaleX(1);
+        opacity: 0.9;
+    }
+    50% {
+        transform: translateX(-50%) scaleY(1.2) scaleX(0.9);
+        opacity: 0.7;
+    }
+}
+
+@keyframes fireRingPulse {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* Aurore boréale cosmique */
+.aurora-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -5;
+    overflow: hidden;
+    opacity: 0.7;
+}
+
+.aurora {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background: linear-gradient(
+        45deg,
+        var(--aurora-color-1) 0%,
+        transparent 20%,
+        var(--aurora-color-2) 40%,
+        transparent 60%,
+        var(--aurora-color-3) 80%,
+        transparent 100%
+    );
+    filter: blur(60px);
+    opacity: 0.4;
+    transform-origin: center center;
+    animation: auroraMove 25s infinite alternate ease-in-out;
+}
+
+.aurora:nth-child(2) {
+    animation-duration: 30s;
+    animation-delay: -5s;
+    opacity: 0.3;
+    filter: blur(80px);
+    background: linear-gradient(
+        -45deg,
+        var(--aurora-color-2) 0%,
+        transparent 30%,
+        var(--aurora-color-3) 50%,
+        transparent 70%,
+        var(--aurora-color-1) 90%,
+        transparent 100%
+    );
+}
+
+.aurora:nth-child(3) {
+    animation-duration: 35s;
+    animation-delay: -10s;
+    opacity: 0.2;
+    filter: blur(100px);
+    background: linear-gradient(
+        125deg,
+        var(--aurora-color-3) 0%,
+        transparent 20%,
+        var(--aurora-color-1) 40%,
+        transparent 60%,
+        var(--aurora-color-2) 80%,
+        transparent 100%
+    );
+}
+
+/* Nébuleuse spatiale */
+.nebula {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -4;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 800 800' xmlns='http://www
+};
